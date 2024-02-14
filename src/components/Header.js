@@ -1,26 +1,32 @@
 import logo1 from "../src_assets/logo1.png";
-import { useNavigate, Route, Routes } from "react-router-dom";
-import Redirect from "../pages/Redirect";
+import { useNavigate, Route, Routes, BrowserRouter } from "react-router-dom";
 import React from "react";
 
-const Header = () => {
+const NavigaterHeader = () => {
   const navigate = useNavigate();
-
-  const redirectUrl = () => {
-    navigate("/redirect", { state: { url: "http://www.hangaramit.com" } });
+  const redirectHome = () => {
+    navigate(`/`);
   };
 
   return (
-    <header className="d-flex justify-content-between align-items-md-center pb-3 mb-5 border-bottom">
-      <h1 className="h4">
-        <div className="d-flex align-items-center text-dark text-decoration-none">
-          <span>Gplayus</span>
-          <img src={logo1} alt="logo" className="Gplayus_logo" />
-        </div>
-      </h1>
-      <button onClick={redirectUrl}>Hangaramit</button>
-      <Redirect />
-    </header>
+    <div class="object-fit-sm-contain border rounded">
+      <img
+        src={logo1}
+        class="img-fluid"
+        alt="Gplayus_logo"
+        onClick={redirectHome}
+      />
+    </div>
+  );
+};
+
+const Header = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<NavigaterHeader />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

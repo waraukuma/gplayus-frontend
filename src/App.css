@@ -1,7 +1,8 @@
-body {
-  background-color: lightblue;
-}
-
 .App {
   text-align: center;
+}
+.ComponentBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
