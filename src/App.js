@@ -1,14 +1,16 @@
-import "./App.css";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import MyGoogleLogin from "./components/MyGoogleLogIn";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import MyAppPage from "./pages/MyAppPage";
 
 export function App() {
   return (
     <div className="App">
-      <Header />
-      <MyGoogleLogin />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/myapp" element={<MyAppPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

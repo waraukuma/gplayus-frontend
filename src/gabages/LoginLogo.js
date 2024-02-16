@@ -9,7 +9,7 @@ const NavigaterHeader = () => {
   };
 
   return (
-    <div class="object-fit-sm-contain border rounded">
+    <div className="d-flex align-items-center py-4 bg-body-tertiary">
       <img
         src={logo1}
         class="img-fluid"
@@ -20,7 +20,7 @@ const NavigaterHeader = () => {
   );
 };
 
-const Header = () => {
+const LoginLogo = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -30,4 +30,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default LoginLogo;

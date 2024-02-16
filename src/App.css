@@ -1,8 +1,16 @@
 .App {
   text-align: center;
-}
-.ComponentBox {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+/* .ComponentBox {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login {
+  text-align: center;
+} */
