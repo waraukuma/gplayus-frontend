@@ -1,18 +1,17 @@
 import { React } from "react";
+import { Container } from "react-bootstrap";
 import MyGoogleLogin from "../components/MyGoogleLogin";
 
 function LoginPage() {
   return (
-    <div className="container-fluid vh-100">
-      <div className="h-100 d-flex justify-content-center align-items-center">
-        <div
-          className="bg-info p-4 d-flex justify-content-center align-items-center"
-          style={{ maxWidth: "300px", maxHeight: "400px" }}
-        >
-          <MyGoogleLogin />
-        </div>
+    <Container
+      fluid
+      className="vh-100 d-flex justify-content-center align-items-center"
+    >
+      <div className="p-2 d-flex justify-content-center align-items-center">
+        <MyGoogleLogin />
       </div>
-    </div>
+    </Container>
   );
 }
 

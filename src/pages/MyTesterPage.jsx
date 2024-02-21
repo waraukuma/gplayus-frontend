@@ -1,16 +1,16 @@
 import { React, useState } from "react";
 import { Container, Navbar, Form, Row, Col, Button } from "react-bootstrap";
 import AppList from "../components/AppList";
-import MyAppStatus from "../components/MyAppStatus";
+import MyTesterStatus from "../components/MyTesterStatus";
 import { useNavigate } from "react-router-dom";
 
-function MyAppPage() {
+function MyTesterPage() {
   const navigate = useNavigate();
   const [status, setStatus] = useState("진행");
 
-  //등록한 앱 상세페이지로 이동(미완성)
+  //등록한 앱 상세 페이지로 이동(미완성)
   const AppDetailsPage = () => {
-    navigate(`/mydetails/{appId}`);
+    navigate(`/myapp/details/{appId}`);
   };
 
   //앱검색 기능(미완성)
@@ -24,7 +24,7 @@ function MyAppPage() {
         <Navbar className="bg-body-tertiary justify-content-between">
           <Form inline>
             <Row>
-              <p className="fw-bold">MyAppPage에 오신 걸 환영합니다.</p>
+              <p className="fw-bold">MyTesterPage에 오신 걸 환영합니다.</p>
             </Row>
           </Form>
           <Form inline>
@@ -43,8 +43,10 @@ function MyAppPage() {
         </Navbar>
         <Form inline>
           <Row>
-            {/* 진행/완료 MyAppStatus 컴퍼넌트 */}
-            <Col>{<MyAppStatus status={status} setStatus={setStatus} />}</Col>
+            {/* 대기/진행/완료 <MyTesterStatus 컴퍼넌트 */}
+            <Col>
+              {<MyTesterStatus status={status} setStatus={setStatus} />}
+            </Col>
           </Row>
         </Form>
       </Container>
@@ -59,4 +61,4 @@ function MyAppPage() {
   );
 }
 
-export default MyAppPage;
+export default MyTesterPage;
