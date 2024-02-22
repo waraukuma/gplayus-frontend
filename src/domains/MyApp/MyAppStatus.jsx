@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import myappregistering from "../assets/myappregistering.svg";
-import myappregistered from "../assets/myappregistered.svg";
+import myicon1 from "../../assets/myicon1.svg";
+import myicon2 from "../../assets/myicon2.svg";
 
 function MyAppStatus(props) {
-  const navigate = useNavigate();
-
   console.log(props.status);
 
   return (
@@ -17,8 +14,9 @@ function MyAppStatus(props) {
           onClick={() => {
             props.setStatus("진행");
           }}
+          style={{ border: props.status === "진행" ? "2px solid red" : "" }}
         >
-          <img src={myappregistering} alt="myappregistering" />
+          <img src={myicon1} alt="myicon1" />
           {/* <Card.Link href="#">진행({5})</Card.Link> */}
           진행
         </Col>
@@ -28,8 +26,9 @@ function MyAppStatus(props) {
           onClick={() => {
             props.setStatus("완료");
           }}
+          style={{ border: props.status === "완료" ? "2px solid blue" : "" }}
         >
-          <img src={myappregistered} alt="myappregistered" />
+          <img src={myicon2} alt="myicon2" />
           {/* <Card.Link href="#">완료({1})</Card.Link> */}
           완료
         </Col>

@@ -1,7 +1,8 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 
-//MyAppPage, MyTesterPage에서 불러올 데이터()
+//MyAppPage, MyTesterPage, AppDetailsPage에서 불러올 데이터()
 
 const MyAppLists = [
   {
@@ -38,12 +39,22 @@ const MyAppLists = [
 
 const AppCard = ({ id, title, description, imageSrc, border }) => {
   // console.log(id, title, description);
+  const navigate = useNavigate();
+
+  //앱 상세페이지 이동
 
   return (
-    <Card style={{ margin: "1.5rem", padding: "1rem", border: `${border}` }}>
+    <Card
+      style={{ margin: "1.5rem", padding: "1rem", border: `${border}` }}
+      onClick={() => {
+        navigate(`/myapp/${id}`);
+        console.log("이동");
+      }}
+    >
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">부제목</Card.Subtitle>
+        <Card.Title>
+          {id}/{title}
+        </Card.Title>
         <Card.Text>{description}</Card.Text>
         {/* <Card.Link href="#">앱으로 이동</Card.Link> */}
       </Card.Body>
@@ -51,7 +62,8 @@ const AppCard = ({ id, title, description, imageSrc, border }) => {
   );
 };
 
-const AppList = ({ status }) => {
+const DetailApp = ({ status }) => {
+  console.log("DetailApp");
   return (
     <div>
       {MyAppLists.map((app) => (
@@ -73,4 +85,4 @@ const AppList = ({ status }) => {
   );
 };
 
-export default AppList;
+export default DetailApp;

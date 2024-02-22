@@ -1,7 +1,7 @@
 import { React } from "react";
 import { useNavigate } from "react-router-dom";
-import logo1 from "../assets/logo1.png";
-import Glogo from "../assets/Glogo.svg";
+import logo1 from "../../assets/logo1.png";
+import Glogo from "../../assets/Glogo.svg";
 import Button from "react-bootstrap/Button";
 
 import { Container, Form, Row, Col } from "react-bootstrap";

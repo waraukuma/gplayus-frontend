@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import myappregistering from "../assets/myappregistering.svg";
-import myappregistered from "../assets/myappregistered.svg";
-import myjoining from "../assets/myjoining.png";
+import myicon2 from "../../assets/myicon2.svg";
+import myicon1 from "../../assets/myicon1.svg";
+import myicon0 from "../../assets/myicon0.png";
 
 function MyTesterStatus(props) {
   console.log(props.status);
@@ -17,7 +17,7 @@ function MyTesterStatus(props) {
           }}
           style={{ border: props.status === "대기" ? "2px solid black" : "" }}
         >
-          <img src={myjoining} alt="myjoining" />
+          <img src={myicon0} alt="myicon0" />
           대기
           {/* <Card.Link href={navigate(0)}>대기</Card.Link> */}
         </Col>
@@ -28,7 +28,7 @@ function MyTesterStatus(props) {
           }}
           style={{ border: props.status === "진행" ? "2px solid red" : "" }}
         >
-          <img src={myappregistering} alt="myappregistering" />
+          <img src={myicon1} alt="myicon1" />
           진행
           {/* <Card.Link href={navigate(0)}>진행</Card.Link> */}
         </Col>
@@ -40,7 +40,7 @@ function MyTesterStatus(props) {
           }}
           style={{ border: props.status === "완료" ? "2px solid blue" : "" }}
         >
-          <img src={myappregistered} alt="myappregistered" />
+          <img src={myicon2} alt="myicon2" />
           {/* <Card.Link href={navigate(0)}>완료</Card.Link> */}
           완료
         </Col>
