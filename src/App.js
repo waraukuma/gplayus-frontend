@@ -3,6 +3,7 @@ import LoginPage from "./domains/Login/LoginPage";
 import MyAppPage from "./domains/MyApp/MyAppPage";
 import MyTesterPage from "./domains/MyTester/MyTesterPage";
 import AppDetailsPage from "./domains/MyApp/AppDetailsPage";
+import Board from "./components/Board";
 
 export function App() {
   return (

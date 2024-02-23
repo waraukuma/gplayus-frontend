@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //MyAppPage, MyTesterPage, AppDetailsPage에서 불러올 데이터()
 
@@ -41,11 +41,10 @@ const AppCard = ({ id, title, description, imageSrc, border }) => {
   // console.log(id, title, description);
   const navigate = useNavigate();
 
-  //앱 상세페이지 이동
-
   return (
     <Card
       style={{ margin: "1.5rem", padding: "1rem", border: `${border}` }}
+      //앱 상세페이지 이동
       onClick={() => {
         navigate(`/myapp/${id}`);
         console.log("이동");
@@ -62,8 +61,8 @@ const AppCard = ({ id, title, description, imageSrc, border }) => {
   );
 };
 
-const DetailApp = ({ status }) => {
-  console.log("DetailApp");
+export default function DetailApp({ status }) {
+  console.log(status);
   return (
     <div>
       {MyAppLists.map((app) => (
@@ -83,6 +82,4 @@ const DetailApp = ({ status }) => {
       ))}
     </div>
   );
-};
-
-export default DetailApp;
+}
