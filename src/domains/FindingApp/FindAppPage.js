@@ -1,23 +1,22 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { Container, Navbar, Form, Row, Col, Button } from "react-bootstrap";
 import AppList from "../../components/AppList";
-import MyAppStatus from "./MyAppStatus";
+import Badge from "../../components/Badge";
+import DetailApp from "../../components/AppList";
 
-function MyAppPage() {
-  const [status, setStatus] = useState("진행");
+//앱검색 기능(미완성)
+const FindingApp = () => {
+  //
+};
 
-  //앱검색 기능(미완성)
-  const FindingApp = () => {
-    //
-  };
-
+function FindAppPage() {
   return (
     <div>
       <Container fluid>
         <Navbar className="bg-body-tertiary justify-content-between">
           <Form inline>
             <Row>
-              <p className="fw-bold">MyAppPage에 오신 걸 환영합니다.</p>
+              <p className="fw-bold">(모든) 앱 찾기</p>
             </Row>
           </Form>
           <Form inline>
@@ -34,21 +33,16 @@ function MyAppPage() {
             </Row>
           </Form>
         </Navbar>
-        <Form>
-          <Row>
-            {/* 진행/완료 MyAppStatus 컴퍼넌트 */}
-            <Col>{<MyAppStatus status={status} setStatus={setStatus} />}</Col>
-          </Row>
-        </Form>
       </Container>
 
       <hr />
       <div className="container-fluid">
         {/* 사용자 등록 앱 표시(카드형식) 진행/완료*/}
-        {<AppList status={status} setStatus={setStatus} />}
+        {<DetailApp />}
       </div>
+      <div className=""></div>
     </div>
   );
 }
 
-export default MyAppPage;
+export default FindAppPage;

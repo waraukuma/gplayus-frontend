@@ -12,40 +12,54 @@ import avatar from "../../assets/avatar1.jpg";
 import Badge from "../../components/Badge";
 import DetailApp from "../../components/DetailApp";
 import Board from "../../components/Board";
-import MyJoinAppModal from "../../components/MyJoinAppModal";
+import MyJoinAppModal from "./MyJoinAppModal.jsx";
 
 function AppDetailsPage() {
   const [showModal, setShowModal] = useState(false);
   const [selected, setSelected] = useState(false);
+
+  //등록여부에 따라 벳지 표시(미완성)
+  // const [badge, setBadge] = useState(false);
+
   console.log("AppDetailsPage");
+
   const openModal = () => {
     setSelected(true);
-    setShowModal((prev) => !prev);
+    setShowModal(true);
   };
 
   return (
     <div className="container">
-      {showModal && <MyJoinAppModal />}
+      {showModal && (
+        <MyJoinAppModal
+          onConfirm={() => {
+            alert("테스터 참여 신청이 완료되었습니다!");
+          }}
+        />
+      )}
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 p-2 c-2">
           <Card>
             <Card.Body className="d-flex p-5 flex-column align-items-center">
               <div className="text-center p-2">
                 <div>
                   {/* 벳지 */}
+                  {/* {<Badge badge={badge} setBadge={setBadge} />} */}
                   {<Badge />}
                   {/* 특정 id값으로 필터링하여 표시하기 */}
                   <DetailApp />
                 </div>
-                <div className="">신조어 기반</div>
+                <div className="mb-2 text-muted">
+                  Badge, DetailApp 컴퍼넌트 사용
+                </div>
               </div>
             </Card.Body>
           </Card>
           {/* 게시판 컴퍼넌트 */}
-          <div className="">{<Board selected={selected} />}</div>
+          <div className=" c-2">{<Board selected={selected} />}</div>
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-6 p-2 c-2">
           <Card>
             <CardHeader className="d-flex flex-row gap-4">
               <CardTitle className="text-sm font-semibold">
@@ -74,8 +88,13 @@ function AppDetailsPage() {
             </CardBody>
           </Card>
           <div className=" mt-5 d-flex position-relative">
-            <div className="row position-absolute bottom-0 start-50 translate-middle-x">
-              <Button onClick={() => openModal()}>테스터 참여</Button>
+            <div
+              style={{ display: "flex", flexWrap: "wrap" }}
+              className="w-100 position-absolute bottom-0 start-50 translate-middle-x "
+            >
+              <Button style={{ flex: 1 }} onClick={() => openModal()}>
+                테스터 참여
+              </Button>
             </div>
           </div>
         </div>

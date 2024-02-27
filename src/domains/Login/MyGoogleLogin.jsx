@@ -12,8 +12,8 @@ const MyGoogleLogin = () => {
     navigate(`/home`);
   };
 
-  const requestBack = () => {
-    // TODO : 백 요청 로직
+  const requestBack = async () => {
+    window.location.href = "http://localhost:8080/oauth2/google";
   };
 
   const responseBack = () => {
@@ -29,7 +29,7 @@ const MyGoogleLogin = () => {
         onClick={redirectHome}
       />
       <Container className="align-items-center shadow p-1 mb-0 bg-body-tertiary rounded">
-        <Form inline onClick={requestBack}>
+        <Form onClick={requestBack}>
           <Row className="align-items-center gx-1">
             <Col xs="auto">
               <img src={Glogo} alt="Glogo" />

@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Badge from "../components/Badge";
 
 //MyAppPage, MyTesterPage, AppDetailsPage에서 불러올 데이터()
 
@@ -19,30 +20,39 @@ const MyAppLists = [
   },
   {
     id: 3,
-    title: "제목 app",
+    title: "자금성",
     description: "앱설명 10자 이상",
     imageSrc: "",
   },
   {
     id: 4,
-    title: "제목 app",
+    title: "24시 전주콩나물국밥",
     description: "앱설명 10자 이상",
     // imageSrc: "",
   },
   {
     id: 5,
-    title: "제목 app",
+    title: "순대실록",
     description: "앱설명 10자 이상",
     // imageSrc: "",
   },
 ];
 
-const AppCard = ({ id, title, description, imageSrc, border }) => {
+const AppCard = ({
+  id,
+  name,
+  title,
+  description,
+  android_url,
+  web_url,
+  border,
+}) => {
   // console.log(id, title, description);
   const navigate = useNavigate();
 
   return (
     <Card
+      className="p-5"
       style={{ margin: "1.5rem", padding: "1rem", border: `${border}` }}
       //앱 상세페이지 이동
       onClick={() => {
@@ -51,6 +61,8 @@ const AppCard = ({ id, title, description, imageSrc, border }) => {
       }}
     >
       <Card.Body>
+        {/* 벳지 */}
+        <div className="p-3">{<Badge />}</div>
         <Card.Title>
           {id}/{title}
         </Card.Title>

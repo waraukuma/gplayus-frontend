@@ -3,7 +3,7 @@ import LoginPage from "./domains/Login/LoginPage";
 import MyAppPage from "./domains/MyApp/MyAppPage";
 import MyTesterPage from "./domains/MyTester/MyTesterPage";
 import AppDetailsPage from "./domains/MyApp/AppDetailsPage";
-import Board from "./components/Board";
+import FindAppPage from "./domains/FindingApp/FindAppPage";
 
 export function App() {
   return (
@@ -13,7 +13,8 @@ export function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/myapp" element={<MyAppPage />} />
           <Route path="/mytester" element={<MyTesterPage />} />
-          <Route path="/myapp/:id" element={<AppDetailsPage />}></Route>
+          <Route path="/myapp/:id" element={<AppDetailsPage />} />
+          <Route path="/apps" element={<FindAppPage />} />
         </Routes>
       </BrowserRouter>
     </div>

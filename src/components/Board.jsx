@@ -1,10 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, Button, Form, Row, Col, Image } from "react-bootstrap";
 import avatar from "../assets/avatar2.jpg";
+import MyJoinAppModal from "../domains/MyApp/MyJoinAppModal.jsx";
 
-export default function Board({ selected }) {
+export default function Board({ selected, openModal }) {
+  const [show, setShow] = useState(false);
   // const myInput = useContext(InputContext);
   const myInput = useRef();
+
+  const onClose = () => {
+    setShow(false);
+  };
 
   useEffect(() => {
     if (selected) {
@@ -12,8 +18,11 @@ export default function Board({ selected }) {
       myInput.current.focus();
     }
   }, [selected]);
+
   return (
-    <div className="container" style={{ padding: 0 }}>
+    <div className="container" style={{ paddingRight: 0, paddingLeft: 0 }}>
+      {show && <MyJoinAppModal show2={show} onClose={onClose} />}
+
       <Card>
         <Card.Header>
           <h5>앱테스터 참여 게시판</h5>
@@ -35,9 +44,18 @@ export default function Board({ selected }) {
                   placeholder="참여합니다."
                 />
               </Col>
-              <Col xs="auto">
-                <Button variant="primary">신청</Button>
-              </Col>
+              {selected && (
+                <Col xs="auto">
+                  <Button
+                    onClick={() => {
+                      console.log("신청 button");
+                      setShow(true);
+                    }}
+                  >
+                    신청
+                  </Button>
+                </Col>
+              )}
             </Row>
           </Form.Group>
           <Form.Group className="mb-5">

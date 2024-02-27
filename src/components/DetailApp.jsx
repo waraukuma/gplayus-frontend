@@ -23,7 +23,7 @@ const MyAppLists = [
   },
   {
     id: 3,
-    name: "제목 app",
+    name: "얌센김밥",
     description: "앱설명 10자 이상",
     // imageSrc: "",
     android_url: "string",
@@ -31,7 +31,7 @@ const MyAppLists = [
   },
   {
     id: 4,
-    name: "제목 app",
+    name: "24시 전주콩나물국밥",
     description: "앱설명 10자 이상",
     // imageSrc: "",
     android_url: "string",
@@ -39,7 +39,7 @@ const MyAppLists = [
   },
   {
     id: 5,
-    name: "제목 app",
+    name: "순대실록",
     description: "앱설명 10자 이상",
     // imageSrc: "",
     android_url: "string",
