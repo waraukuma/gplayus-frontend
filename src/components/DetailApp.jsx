@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
-//APpDetailsPage에서 불러올 데이터()
+//AppDetailsPage에서 불러올 데이터()
 
 const MyAppLists = [
   {
     id: 1,
     name: "BlueDragonQuiz",
     description: "안드로이드 전용, 신조어관련",
-    android_url: "string",
-    web_url: "string",
+    android_url: "",
+    web_url: "http://localhost:8080/oauth2/google",
     // imageSrc: "",
+    joiner: "Choi",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const MyAppLists = [
     // imageSrc: "",
     android_url: "string",
     web_url: "string",
+    joiner: "Park",
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const MyAppLists = [
     // imageSrc: "",
     android_url: "string",
     web_url: "string",
+    joiner: "",
   },
   {
     id: 4,
@@ -36,6 +39,7 @@ const MyAppLists = [
     // imageSrc: "",
     android_url: "string",
     web_url: "string",
+    joiner: "kim",
   },
   {
     id: 5,
@@ -44,21 +48,34 @@ const MyAppLists = [
     // imageSrc: "",
     android_url: "string",
     web_url: "string",
+    joiner: "",
   },
 ];
 
-const AppCard = ({ id, name, description, android_url, web_url }) => {
+const AppCard = ({ id, name, description, android_url, joiner, web_url }) => {
   // console.log(id, name, description);
 
   return (
-    <Card style={{ margin: "1rem", padding: "0.5rem", border: "none" }}>
+    <Card
+      style={{
+        margin: "1rem",
+        padding: "0.5rem",
+        border: "none",
+        whiteSpace: "pre-wrap",
+      }}
+    >
       <Card.Body>
-        <Card.Title className="text-lg font-semibold">
-          {id} / {name}
+        <Card.Title>
+          이름: {name} / {id}
         </Card.Title>
-        <Card.Text>{description}</Card.Text>
-        <Card.Link href="#">{android_url}</Card.Link>
-        <Card.Link href="#">{web_url}</Card.Link>
+        <Card.Text>지원자: {joiner}</Card.Text>
+        <Card.Text>앱 설명: {description}</Card.Text>
+        <Card.Link href="#">
+          <Card.Text>앱(모바일) 참여 신청: {android_url}</Card.Text>
+        </Card.Link>
+        <Card.Link href="#">
+          <Card.Text>웹(인터넷) 참여 신청: {web_url}</Card.Text>
+        </Card.Link>
       </Card.Body>
     </Card>
   );
@@ -70,7 +87,6 @@ export default function DetailApp() {
   const [app, setApp] = useState(null);
   useEffect(() => {
     const appData = MyAppLists.find((app) => app.id === parseInt(id));
-
     setApp(appData);
   }, [id]);
 

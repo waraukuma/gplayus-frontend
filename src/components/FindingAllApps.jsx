@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import Badge from "../components/Badge";
 
-//MyAppPage, MyTesterPage, AppDetailsPage에서 불러올 데이터()
+//AppDetailsPage에서 불러올 데이터()
 
 const MyAppLists = [
   {
     id: 1,
     name: "BlueDragonQuiz",
     description: "안드로이드 전용, 신조어관련",
-    android_url: "string",
-    web_url: "string",
+    android_url: "",
+    web_url: "http://localhost:8080/oauth2/google",
     // imageSrc: "",
     joiner: "Choi",
   },
@@ -53,32 +51,17 @@ const MyAppLists = [
   },
 ];
 
-const AppCard = ({
-  id,
-  name,
-  title,
-  joiner,
-  description,
-  android_url,
-  web_url,
-  border,
-}) => {
-  // console.log(id, title, description);
-  const navigate = useNavigate();
-
+const AppCard = ({ id, name, description, android_url, joiner, web_url }) => {
+  console.log(id, name, description);
   return (
     <Card
-      className="p-5"
-      style={{ margin: "1.5rem", padding: "1rem", border: `${border}` }}
-      //앱 상세페이지 이동
-      onClick={() => {
-        navigate(`/myapp/${id}`);
-        console.log("이동");
+      style={{
+        margin: "1rem",
+        padding: "0.5rem",
+        whiteSpace: "pre-wrap",
       }}
     >
       <Card.Body>
-        {/* 벳지 */}
-        <div className="p-3">{<Badge />}</div>
         <Card.Title>
           이름: {name} / {id}
         </Card.Title>
@@ -95,24 +78,32 @@ const AppCard = ({
   );
 };
 
-export default function AppList({ status }) {
-  console.log(status);
+export default function FindingAllApps({ searchData }) {
+  const [appData, setAppData] = useState([]);
+  console.log(appData);
+
+  useEffect(() => {
+    console.log("AllApps effect");
+    if (!searchData || searchData === "") {
+      setAppData(MyAppLists);
+    }
+    //검색데이터 필터링
+    else {
+      const filteredApps = MyAppLists.filter((item) => {
+        return (
+          item.name.indexOf(searchData) > -1 ||
+          item.description.indexOf(searchData) > -1 ||
+          item.joiner.indexOf(searchData) > -1
+        );
+      });
+      setAppData(filteredApps);
+    }
+  }, [searchData]);
+
   return (
     <div>
-      {MyAppLists.map((app) => (
-        <AppCard
-          key={app.title}
-          {...app}
-          border={
-            status === "대기"
-              ? " 2px solid black"
-              : status === "진행"
-              ? " 2px solid red"
-              : status === "완료"
-              ? " 2px solid blue"
-              : ""
-          }
-        />
+      {appData.map((app) => (
+        <AppCard key={app.id} {...app} />
       ))}
     </div>
   );
