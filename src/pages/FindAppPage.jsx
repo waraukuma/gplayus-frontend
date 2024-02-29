@@ -1,22 +1,17 @@
-import { React, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Container, Navbar, Form, Row, Col, Button } from "react-bootstrap";
+
+import { useLocation, useParams } from "react-router-dom";
 import AppList from "../components/AppList";
-import MyAppStatus from "../components/Status/MyAppStatus";
+import Paging from "../components/Paging";
 
-function MyAppPage() {
-  //로그인 후 상태 가정
-  const login = localStorage.getItem("login");
-  const loginId = localStorage.getItem("login_id");
-  const loginName = localStorage.getItem("login_name");
-  console.log(login, loginId);
-
-  const [status, setStatus] = useState("진행");
-
+function FindAppPage() {
   //검색
   const [searchInput, setSearchInput] = useState("");
   const search = useRef();
   const handleSearch = (e) => {
     e.preventDefault();
+
     //검색어 설정
     setSearchInput(search.current.value);
     console.log("검색 " + search.current.value);
@@ -28,21 +23,39 @@ function MyAppPage() {
     setSearchInput("");
     search.current.value = "";
   };
+
+  //현재 페이지 가져오기
+  const { pageNumber, totalPage, pageCount } = useParams();
+  // http://localhost:3000/apps?setPage=1&page=10
+  // const location = useLocation();
+  // const searchParams = new URLSearchParams(location.search);
+  // const setPage = searchParams.get("setPage");
+
+  console.log(` pageCount ${pageCount}`);
+
+  // setPage을 사용하여 해당 페이지에 맞는 데이터를 가져와서 렌더링
+
   return (
     <div>
       <Container fluid>
         <Navbar className="bg-body-tertiary justify-content-between">
           <Form>
             <Row>
-              <p className="fw-bold">
-                {loginName}님 MyAppPage에 오신 걸 환영합니다.
-              </p>
+              <h2 className="fw-bold">앱 찾기</h2>
             </Row>
           </Form>
           <Form>
             <Row>
               <Col>
-                <Form.Control type="text" placeholder="Search" ref={search} />
+                <Form.Control
+                  type="text"
+                  placeholder="Search"
+                  ref={search}
+                  // value={searchInput}
+                  // onChange={(e) => {
+                  //   // setSearchInput(e.target.value);
+                  // }}
+                />
               </Col>
               <Col xs="auto">
                 {/* 앱검색 기능 */}
@@ -57,23 +70,20 @@ function MyAppPage() {
             </Row>
           </Form>
         </Navbar>
-        <Form>
-          <Row>
-            {/* 진행/완료 MyAppStatus 컴퍼넌트 */}
-            <Col>{<MyAppStatus status={status} setStatus={setStatus} />}</Col>
-          </Row>
-        </Form>
       </Container>
 
       <hr />
       <div className="container-fluid">
         {/* 사용자 등록 앱 표시(카드형식) 진행/완료*/}
+        <AppList searchData={searchInput} clearSearch={clearSearch} />
+      </div>
+      <div className="">
         {
-          <AppList
-            status={status}
-            setStatus={setStatus}
-            searchData={searchInput}
-            clearSearch={clearSearch}
+          <Paging
+            totalPage={totalPage}
+            limit={5}
+            pageCount={pageCount}
+            pageNumber={pageNumber}
           />
         }
       </div>
@@ -81,4 +91,4 @@ function MyAppPage() {
   );
 }
 
-export default MyAppPage;
+export default FindAppPage;
