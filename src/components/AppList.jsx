@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Badge from "../components/Badge";
@@ -95,13 +95,34 @@ const AppCard = ({
   );
 };
 
-export default function AppList({ status }) {
+export default function AppList({ status, searchData }) {
+  const [appData, setAppData] = useState([]);
+  console.log(appData);
   console.log(status);
+
+  useEffect(() => {
+    console.log("AllApps effect");
+    if (!searchData || searchData === "") {
+      setAppData(MyAppLists);
+    }
+    //검색데이터 필터링
+    else {
+      const filteredApps = MyAppLists.filter((item) => {
+        return (
+          item.name.indexOf(searchData) > -1 ||
+          item.description.indexOf(searchData) > -1 ||
+          item.joiner.indexOf(searchData) > -1
+        );
+      });
+      setAppData(filteredApps);
+    }
+  }, [searchData]);
+  console.log("dangdang");
   return (
     <div>
-      {MyAppLists.map((app) => (
+      {appData.map((app) => (
         <AppCard
-          key={app.title}
+          key={app.id}
           {...app}
           border={
             status === "대기"

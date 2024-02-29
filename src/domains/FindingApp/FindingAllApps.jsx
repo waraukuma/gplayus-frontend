@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 //AppDetailsPage에서 불러올 데이터()
 
@@ -53,12 +54,17 @@ const MyAppLists = [
 
 const AppCard = ({ id, name, description, android_url, joiner, web_url }) => {
   console.log(id, name, description);
+  const navigate = useNavigate();
   return (
     <Card
       style={{
         margin: "1rem",
         padding: "0.5rem",
         whiteSpace: "pre-wrap",
+      }}
+      onClick={() => {
+        navigate(`/apps/${id}`);
+        console.log("이동");
       }}
     >
       <Card.Body>

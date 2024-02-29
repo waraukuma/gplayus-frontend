@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Container, Navbar, Form, Row, Col, Button } from "react-bootstrap";
-import FindingAllApps from "../../components/FindingAllApps";
-import Paging from "../../components/Paging";
+import FindingAllApps from "./FindingAllApps";
+import Paging from "./Paging";
+import { useParams } from "react-router-dom";
 
 function FindAppPage() {
   //검색
@@ -15,16 +16,23 @@ function FindAppPage() {
     console.log("검색 " + search.current.value);
   };
 
+  //현재 페이지 가져오기
+  const { pageNumber, pageCount } = useParams();
+  console.log(`pageNumber ${pageNumber}`);
+  console.log(`pageCount ${pageCount}`);
+
+  // pageNumber을 사용하여 해당 페이지에 맞는 데이터를 가져와서 렌더링
+
   return (
     <div>
       <Container fluid>
         <Navbar className="bg-body-tertiary justify-content-between">
-          <Form inline>
+          <Form>
             <Row>
               <h2 className="fw-bold">앱 찾기</h2>
             </Row>
           </Form>
-          <Form inline>
+          <Form>
             <Row>
               <Col>
                 <Form.Control type="text" placeholder="Search" ref={search} />
@@ -49,7 +57,16 @@ function FindAppPage() {
         {/* 사용자 등록 앱 표시(카드형식) 진행/완료*/}
         {<FindingAllApps searchData={searchInput} />}
       </div>
-      <div className="">{<Paging />}</div>
+      <div className="">
+        {
+          <Paging
+            totalItems={30}
+            itemCountPerPage={5}
+            pageCount={5}
+            currentPage={pageNumber}
+          />
+        }
+      </div>
     </div>
   );
 }

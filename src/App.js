@@ -14,7 +14,8 @@ export function App() {
           <Route path="/myapp" element={<MyAppPage />} />
           <Route path="/mytester" element={<MyTesterPage />} />
           <Route path="/myapp/:id" element={<AppDetailsPage />} />
-          <Route path="/apps" element={<FindAppPage />} />
+          <Route path="/apps" element={<FindAppPage />}></Route>
+          <Route path="/apps/:pageNumber" element={<FindAppPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
