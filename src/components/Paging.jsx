@@ -17,8 +17,8 @@ export default function Paging({
   const navigate = useNavigate();
   const totalPages = Math.ceil(totalItems / itemCountPerPage);
   const [start, setStart] = useState(1);
-  // const [end, setEnd] = useState(Math.floor(totalPages / pageCount));
-  let endPage = start + (pageCount - 1);
+  const [end, setEnd] = useState(Math.floor(totalPages / pageCount));
+  const endPage = start + (pageCount - 1);
   if (endPage > totalPages) {
     endPage = totalPages;
   }
@@ -71,7 +71,7 @@ export default function Paging({
         );
       })}
       <Pagination.Next
-        disabled={start + pageCount - 1 >= totalPages}
+        disabled={endPage === totalPages}
         onClick={handleNextClick}
       >
         다음

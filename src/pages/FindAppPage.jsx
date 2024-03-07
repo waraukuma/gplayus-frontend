@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Container, Navbar, Form, Row, Col, Button } from "react-bootstrap";
-import FindingAllApps from "./FindingAllApps";
-import Paging from "./Paging";
-import { useParams } from "react-router-dom";
+
+import { useLocation, useParams } from "react-router-dom";
+import AppList from "../components/AppList";
+import Paging from "../components/Paging";
 
 function FindAppPage() {
   //검색
@@ -10,18 +11,29 @@ function FindAppPage() {
   const search = useRef();
   const handleSearch = (e) => {
     e.preventDefault();
+
     //검색어 설정
     setSearchInput(search.current.value);
-    if (!search.current.value) alert("입력하신 검색어가 없습니다.");
     console.log("검색 " + search.current.value);
   };
 
-  //현재 페이지 가져오기
-  const { pageNumber, pageCount } = useParams();
-  console.log(`pageNumber ${pageNumber}`);
-  console.log(`pageCount ${pageCount}`);
+  //입력된 검색어와 데이터 불일치
+  const clearSearch = () => {
+    console.log("clear search");
+    setSearchInput("");
+    search.current.value = "";
+  };
 
-  // pageNumber을 사용하여 해당 페이지에 맞는 데이터를 가져와서 렌더링
+  //현재 페이지 가져오기
+  const { pageNumber, totalPage, pageCount } = useParams();
+  // http://localhost:3000/apps?setPage=1&page=10
+  // const location = useLocation();
+  // const searchParams = new URLSearchParams(location.search);
+  // const setPage = searchParams.get("setPage");
+
+  console.log(` pageCount ${pageCount}`);
+
+  // setPage을 사용하여 해당 페이지에 맞는 데이터를 가져와서 렌더링
 
   return (
     <div>
@@ -35,7 +47,15 @@ function FindAppPage() {
           <Form>
             <Row>
               <Col>
-                <Form.Control type="text" placeholder="Search" ref={search} />
+                <Form.Control
+                  type="text"
+                  placeholder="Search"
+                  ref={search}
+                  // value={searchInput}
+                  // onChange={(e) => {
+                  //   // setSearchInput(e.target.value);
+                  // }}
+                />
               </Col>
               <Col xs="auto">
                 {/* 앱검색 기능 */}
@@ -55,15 +75,15 @@ function FindAppPage() {
       <hr />
       <div className="container-fluid">
         {/* 사용자 등록 앱 표시(카드형식) 진행/완료*/}
-        {<FindingAllApps searchData={searchInput} />}
+        <AppList searchData={searchInput} clearSearch={clearSearch} />
       </div>
       <div className="">
         {
           <Paging
-            totalItems={30}
-            itemCountPerPage={5}
-            pageCount={5}
-            currentPage={pageNumber}
+            totalPage={totalPage}
+            limit={5}
+            pageCount={pageCount}
+            pageNumber={pageNumber}
           />
         }
       </div>

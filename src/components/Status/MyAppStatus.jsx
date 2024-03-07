@@ -3,18 +3,22 @@ import { Container, Row, Col } from "react-bootstrap";
 import myicon1 from "../../assets/myicon1.svg";
 import myicon2 from "../../assets/myicon2.svg";
 
-function MyAppStatus(props) {
-  console.log(props.status);
+function MyAppStatus({ status, setStatus }) {
+  console.log(status);
 
   return (
-    <Container border border-light-subtle style={{ padding: "1rem" }}>
+    <Container
+      border="true"
+      className="border-light-subtle"
+      style={{ padding: "1rem" }}
+    >
       <Row>
         <Col
           className="d-flex flex-column align-items-center"
           onClick={() => {
-            props.setStatus("진행");
+            setStatus("진행");
           }}
-          style={{ border: props.status === "진행" ? "2px solid red" : "" }}
+          style={{ border: status === "진행" ? "2px solid red" : "" }}
         >
           <img src={myicon1} alt="myicon1" />
           진행
@@ -23,9 +27,9 @@ function MyAppStatus(props) {
         <Col
           className="d-flex flex-column align-items-center"
           onClick={() => {
-            props.setStatus("완료");
+            setStatus("완료");
           }}
-          style={{ border: props.status === "완료" ? "2px solid blue" : "" }}
+          style={{ border: status === "완료" ? "2px solid blue" : "" }}
         >
           <img src={myicon2} alt="myicon2" />
           완료
